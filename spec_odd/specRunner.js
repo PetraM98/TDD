@@ -1,0 +1,1 @@
+const CountOddNumber = require('./countOddNumbers.spec.js')

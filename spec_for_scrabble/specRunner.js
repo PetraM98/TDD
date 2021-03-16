@@ -1,0 +1,1 @@
+const scrabble = require('./scrabble.spec.js')
