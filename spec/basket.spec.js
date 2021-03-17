@@ -69,9 +69,45 @@ bagel.addToBasket('item5')
 expected = 6
 //2.Execute
 actual = bagel.addToBasket('item6')
-
 //3.Verify
 console.log(assertEquals(expected,actual))
+
+//TEST CASE 6 - checking if an item is already in the basket= note: items represent the IDs in this case.
+//1.Setup
+console.log('Cheking if it throws an error when you want to put the item with the same ID into the basket.')
+bagel = new Basket()
+bagel.addToBasket('item1')
+bagel.addToBasket('item2')
+expected = 'You already have an item with the same ID in your basket'
+//2.Execute
+actual = bagel.addToBasket('item1')
+//3.Verify
+console.log(assertEquals(expected,actual))
+
+
+
+//TEST CASE 7 - Checking if the method throws an error when trying to remove an item with an ID which is not in the basket 
+//1.Setup
+console.log('Checking if the method throws an error when trying to remove an item with an ID which is not in the basket')
+bagel = new Basket()
+bagel.addToBasket('item1')
+bagel.addToBasket('item2')
+expected = 'This item is not in your basket'
+//2.Execute
+actual = bagel.removeFromBasket('item3')
+//3.Verify
+console.log(assertEquals(expected,actual))
+
+//TEST CASE 8 -Checking if the price of the item is shown before adding it to the basket
+//1.Setup
+//2.Execute
+//3.Verify
+
+//TEST CASE 9 - Checking if the checkOut() function works
+//1.Setup
+//2.Execute
+//3.Verify
+
 
 
 

@@ -4,6 +4,9 @@ class Basket{
         this.capacity = 5
     }
     addToBasket(item){
+        if(this.basket.includes(item)){
+            return 'You already have an item with the same ID in your basket'
+        }
         if (!this.isFull()){
             this.basket.push(item)
             return this.basket.length
@@ -13,8 +16,11 @@ class Basket{
         }
       
          }
-    removeFromBasket(bagel){
-        const index = this.basket.indexOf(bagel)
+    removeFromBasket(item){
+        if (!this.basket.includes(item)){
+            return 'This item is not in your basket'
+        }
+        const index = this.basket.indexOf(item)
         this.basket.splice(index, 1)
         return this.basket.length
 //
