@@ -1,25 +1,36 @@
 class Basket{
-    constructor(bagel){
+    constructor(){
         this.basket = []
-        //return this.basket
+        this.capacity = 5
     }
-    addToBasket(bagel){
-        this.basket.push(bagel)
-        return this.basket.length
-    }
+    addToBasket(item){
+        if (!this.isFull()){
+            this.basket.push(item)
+            return this.basket.length
+        }
+        else if (this.isFull()){
+            return  this.increaseCapacity()
+        }
+      
+         }
     removeFromBasket(bagel){
         const index = this.basket.indexOf(bagel)
         this.basket.splice(index, 1)
         return this.basket.length
 //
     }
-
+    isFull(){
+        if (this.basket.length < this.capacity ){
+            return false
+        }
+        else if (this.basket.length >=this.capacity ){
+            return true
+        }
+    }
+    increaseCapacity(){
+        return this.capacity+=1
+    }
 }
 
-let bagel = new Basket()
-//console.log(bagel.addToBasket('plain bagel'))
-//console.log(bagel.addToBasket('salty bagel'))
-///console.log(bagel.addToBasket('blueberry bagel'))
-//console.log(bagel.removeFromBasket('plain bagel'))
-//console.log(bagel.removeFromBasket('blueberry bagel'))
+
 module.exports = Basket
