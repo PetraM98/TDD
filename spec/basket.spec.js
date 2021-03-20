@@ -4,11 +4,11 @@ const Basket = require('../src/basket.js')
 
 /// TEST CASE 1
 //1.Setup
-console.log('Checking if addToBasket() method works properly')
-let bagel = new Basket()
+console.log('1.Checks if addToBasket() method works')
+let basket = new Basket()
 let expected = 1
 //2.Execute
-let actual = bagel.addToBasket('item')
+let actual = basket.addToBasket('bagel1', 1)
 //3.Verify
 console.log(assertEquals(expected,actual))
 
@@ -16,14 +16,14 @@ console.log(assertEquals(expected,actual))
 
 /// TEST CASE 2
 //1.Setup
-console.log('Checking if addToBasket() method works properly')
-bagel = new Basket()
-bagel.addToBasket('item1')
-bagel.addToBasket('item2')
-bagel.addToBasket('item3')
+console.log('2.Checks if addToBasket() method works')
+basket = new Basket()
+basket.addToBasket('bagel1', 1)
+basket.addToBasket('bagel2',2)
+basket.addToBasket('bagel3',3)
 expected = 4
 //2.Execute
-actual = bagel.addToBasket('item4')
+actual = basket.addToBasket('bagel4')
 //3.Verify
 console.log(assertEquals(expected, actual))
 
@@ -31,83 +31,120 @@ console.log(assertEquals(expected, actual))
 
 //TEST CASE 3
 //1.Setup
-console.log('Checking if removeFromBasket() method works properly')
-bagel = new Basket()
-bagel.addToBasket('item1')
-bagel.addToBasket('item2')
-bagel.addToBasket('item3')
+console.log('3.Checks if removeFromBasket() method works')
+basket = new Basket()
+basket.addToBasket('bagel1', 1)
+basket.addToBasket('bagel2', 2)
+basket.addToBasket('bagel3' ,3)
 expected = 2
 //2.Execute
-actual = bagel.removeFromBasket('item2')
+actual = basket.removeFromBasket('bagel2')
 //3.Verify
 console.log(assertEquals(expected, actual))
 
 
 
-//TEST CASE 4 = for checking whether my basket is full
+//TEST CASE 4 
 //1.Setup
-console.log('Checking if isFul() method evaluates to be false when the size of basket is less than its capacity')
-bagel = new Basket()
-bagel.addToBasket('item1')
-expected = 2
+console.log('4.Checks if isFull() method works')
+basket = new Basket()
+basket.addToBasket('bagel1', 1)
+expected = false
 //2.Execute
-actual = bagel.addToBasket('item2')
+actual = basket.isFull()
 //3. Verify 
 console.log(assertEquals(expected,actual))
 
 
 
-//TEST CASE 5 - for checking whether my basket is full, and whether the size of the basket was increased.
+//TEST CASE 5
 //1.Setup
-console.log('Checking if the capacity of the basket increases as the basket was full beforehand')
-bagel = new Basket()
-bagel.addToBasket('item1')
-bagel.addToBasket('item2')
-bagel.addToBasket('item3')
-bagel.addToBasket('item4')
-bagel.addToBasket('item5')
-expected = 6
+console.log('5.Checks if isFull() method works')
+basket = new Basket()
+basket.addToBasket('bagel1', 1)
+basket.addToBasket('bagel2', 2)
+basket.addToBasket('bagel3', 3)
+basket.addToBasket('bagel4', 4)
+basket.addToBasket('bagel5', 5)
+expected = true
 //2.Execute
-actual = bagel.addToBasket('item6')
-//3.Verify
-console.log(assertEquals(expected,actual))
-
-//TEST CASE 6 - checking if an item is already in the basket= note: items represent the IDs in this case.
-//1.Setup
-console.log('Cheking if it throws an error when you want to put the item with the same ID into the basket.')
-bagel = new Basket()
-bagel.addToBasket('item1')
-bagel.addToBasket('item2')
-expected = 'You already have an item with the same ID in your basket'
-//2.Execute
-actual = bagel.addToBasket('item1')
-//3.Verify
+actual = basket.isFull()
+//3. Verify 
 console.log(assertEquals(expected,actual))
 
 
 
-//TEST CASE 7 - Checking if the method throws an error when trying to remove an item with an ID which is not in the basket 
+//TEST CASE 6
 //1.Setup
-console.log('Checking if the method throws an error when trying to remove an item with an ID which is not in the basket')
-bagel = new Basket()
-bagel.addToBasket('item1')
-bagel.addToBasket('item2')
+console.log('6.Checks if addtoBasket() method works when basket is full')
+basket = new Basket()
+basket.addToBasket('bagel1', 1)
+basket.addToBasket('bagel2', 2)
+basket.addToBasket('bagel3', 3 )
+basket.addToBasket('bagel4', 4 )
+basket.addToBasket('bagel5', 5)
+expected = 'Your basket is full'
+//2.Execute
+actual = basket.addToBasket('bagel5')
+//3. Verify 
+console.log(assertEquals(expected,actual))
+
+
+
+//TEST CASE 7
+//1.Setup
+console.log('7.Checks if removeFromBasket() method throws an error when you do not have the item in the basket')
+basket = new Basket()
+basket.addToBasket('bagel1')
+basket.addToBasket('bagel2')
 expected = 'This item is not in your basket'
 //2.Execute
-actual = bagel.removeFromBasket('item3')
+actual = basket.removeFromBasket('bagel3')
 //3.Verify
 console.log(assertEquals(expected,actual))
 
-//TEST CASE 8 -Checking if the price of the item is shown before adding it to the basket
-//1.Setup
-//2.Execute
-//3.Verify
 
-//TEST CASE 9 - Checking if the checkOut() function works
-//1.Setup
-//2.Execute
-//3.Verify
 
+//TEST CASE 8
+console.log('8.Checks the ID of the item')
+//1.Setup
+basket = new Basket()
+basket.addToBasket('bagel1', 1)
+expected = 'You already have an item with this ID'
+//2.Execute
+actual = basket.addToBasket('bagel2',1)
+//3.Verify
+console.log(assertEquals(expected,actual))
+
+
+
+//TEST CASE 9
+console.log('9.Checks the total sum of the bagels')
+//1.Setup
+basket = new Basket()
+basket.addToBasket('bagel1', 1, 0.50)
+basket.addToBasket('bagel2', 2, 0.60)
+expected = 1.10
+//2.Execute
+actual = basket.total()
+//3.Verify
+console.log(assertEquals(expected,actual))
+
+
+
+//TEST CASE 10
+console.log('10.Checks the total sum of the bagels')
+//1.Setup
+basket = new Basket()
+basket.addToBasket('bagel1', 1, 0.50)
+basket.addToBasket('bagel2', 2, 0.60)
+basket.removeFromBasket('bagel2', 2, -0.60)
+expected = 0.50
+//2.Execute
+let result = Number(parseFloat(basket.total()).toPrecision(3))   // I had to use this snippet of code because of floating point numeric precision.
+actual =  result 
+//3.Verify
+console.log(assertEquals(expected,actual))
 
 
 

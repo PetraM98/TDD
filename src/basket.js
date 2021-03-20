@@ -1,42 +1,55 @@
 class Basket{
     constructor(){
-        this.basket = []
+        this.ids = [];
+        this.basket = [];
+        this.prices = [];
+        this.individualPrices =[];
         this.capacity = 5
+       
     }
-    addToBasket(item){
-        if(this.basket.includes(item)){
-            return 'You already have an item with the same ID in your basket'
-        }
+    addToBasket(bagel,id, price){
+        if (!this.ids.includes(id)){
         if (!this.isFull()){
-            this.basket.push(item)
+            this.basket.push(bagel)
+            this.ids.push(id)
+            this.prices.push(price)
             return this.basket.length
         }
-        else if (this.isFull()){
-            return  this.increaseCapacity()
+        else {
+            return 'Your basket is full'
         }
+    }
+    else {
+        return 'You already have an item with this ID'
+    }
       
          }
-    removeFromBasket(item){
-        if (!this.basket.includes(item)){
+    removeFromBasket(bagel,id, price){
+        if (!this.basket.includes(bagel)){
             return 'This item is not in your basket'
         }
-        const index = this.basket.indexOf(item)
+        else{
+        const index = this.basket.indexOf(bagel)
         this.basket.splice(index, 1)
+        this.prices.push(price)
         return this.basket.length
-//
+ }
     }
     isFull(){
-        if (this.basket.length < this.capacity ){
-            return false
-        }
-        else if (this.basket.length >=this.capacity ){
-            return true
-        }
+        return this.basket.length >= this.capacity
     }
-    increaseCapacity(){
-        return this.capacity+=1
+
+    checkPrice(bagel, price){
+        this.individualPrices.push(bagel + '-' + price)
     }
+    total(){
+        return this.prices.reduce((a, b) => a + b, 0)
+    }
+
 }
 
 
+
 module.exports = Basket
+
+
